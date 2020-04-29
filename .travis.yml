@@ -13,7 +13,7 @@ deploy:
         provider: elasticbeanstalk
         region: "us-east-2"
         app: "simpleweb"
-        env: "Simpleweb-env"
+        env: "Simpleweb-env-1"
         bucket_name: "elasticbeanstalk-us-east-2-870598663126"
         bucket_path: "docker"
         on:
