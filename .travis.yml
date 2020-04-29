@@ -1,0 +1,22 @@
+sudo: required
+services:
+        - docker
+
+before_install:
+        - docker build -t tcesario/simpleweb -f Dockerfile .
+
+script:
+        - docker run -e CI=true tcesario/simpleweb npm run test
+
+deploy:
+        edge: true
+        provider: elasticbeanstalk
+        region: "us-east-2"
+        app: "simpleweb"
+        env: "Simpleweb-env"
+        bucket_name: "elasticbeanstalk-us-east-2-870598663126"
+        bucket_path: "docker"
+        on:
+                branch: master
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY
