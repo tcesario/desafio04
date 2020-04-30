@@ -3,7 +3,7 @@ sudo: required
 services:
         - docker
 
-after_deploy:
+before_install:
         - docker build -t tcesario/simpleweb -f Dockerfile .
 
 deploy:
@@ -19,3 +19,5 @@ deploy:
         access_key_id: $AWS_ACCESS_KEY
         secret_access_key: $AWS_SECRET_KEY
 
+after_install:
+        - docker run -p 8080:8080 tcesario/simpleweb
