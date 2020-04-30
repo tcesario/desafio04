@@ -6,8 +6,8 @@ services:
 before_deploy:
         - docker build -t tcesario/simpleweb -f Dockerfile .
 
-after_deploy:
-        - docker run -e CI=true -p 8080:8080 tcesario/simpleweb
+        #after_deploy:
+        #        - docker run -e CI=true -p 8080:8080 tcesario/simpleweb
 
 deploy:
         edge: true
