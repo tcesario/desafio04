@@ -1,10 +1,22 @@
-language: generic
+language: node_js
+node_js:
+  - "8"
 sudo: required
-services:
-        - docker
 
-before_install:
-        - docker build -t tcesario/simpleweb -f Dockerfile .
+services:
+  - docker
+
+after_deploy:
+  - echo "done deploying"
+
+
+#language: generic
+#sudo: required
+#services:
+#        - docker
+
+          #before_install:
+          #        - docker build -t tcesario/simpleweb -f Dockerfile .
 
 deploy:
         edge: true
@@ -19,5 +31,5 @@ deploy:
         access_key_id: $AWS_ACCESS_KEY
         secret_access_key: $AWS_SECRET_KEY
 
-after_install:
-        - docker run -p 8080:8080 tcesario/simpleweb
+        #after_install:
+        #        - docker run -p 8080:8080 tcesario/simpleweb
