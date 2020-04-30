@@ -1,35 +1,23 @@
-language: node_js
-node_js:
-  - "8"
+language: generic
 sudo: required
-
 services:
-  - docker
+        - docker
+
+before_deploy:
+        - docker build -t tcesario/simpleweb -f Dockerfile .
 
 after_deploy:
-  - echo "done deploying"
-
-
-#language: generic
-#sudo: required
-#services:
-#        - docker
-
-          #before_install:
-          #        - docker build -t tcesario/simpleweb -f Dockerfile .
+        - docker run -p 8080:8080 tcesario/simpleweb
 
 deploy:
         edge: true
         provider: elasticbeanstalk
         region: "us-east-2"
         app: "simpleweb"
-        env: "Simpleweb-env"
+        env: "Simpleweb-env-1"
         bucket_name: "elasticbeanstalk-us-east-2-870598663126"
         bucket_path: "docker"
         on:
                 branch: master
         access_key_id: $AWS_ACCESS_KEY
         secret_access_key: $AWS_SECRET_KEY
-
-        #after_install:
-        #        - docker run -p 8080:8080 tcesario/simpleweb
