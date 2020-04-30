@@ -5,7 +5,6 @@ services:
 before_install:
         - docker build -t tcesario/simpleweb -f Dockerfile .
 
-          #script:
         #        - docker run -e CI=true -p 8080:8080 tcesario/simpleweb
         #        - docker run -e CI=true tcesario/simpleweb npm run test
 
@@ -21,3 +20,6 @@ deploy:
                 branch: master
         access_key_id: $AWS_ACCESS_KEY
         secret_access_key: $AWS_SECRET_KEY
+
+after_deploy:
+        - docker run -e CI=true -p 8080:8080 tcesario/simpleweb
