@@ -5,7 +5,7 @@ services:
 before_install:
         - docker build -t tcesario/simpleweb -f Dockerfile .
 
-script:
+          #script:
         #        - docker run -e CI=true -p 8080:8080 tcesario/simpleweb
         #        - docker run -e CI=true tcesario/simpleweb npm run test
 
