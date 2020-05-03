@@ -6,12 +6,15 @@ services:
 before_deploy:
         - docker build -t tcesario/simpleweb -f Dockerfile .
 
+script:
+        - docker run -e CI=true tcesario/simpleweb npm test
+
 deploy:
         edge: true
         provider: elasticbeanstalk
         region: "us-east-2"
-        app: "simpleweb2"
-        env: "Simpleweb2-env"
+        app: "simpleweb"
+        env: "Simpleweb-env"
         bucket_name: "elasticbeanstalk-us-east-2-870598663126"
         bucket_path: "docker"
         on:
